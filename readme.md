@@ -6,7 +6,7 @@
 [assets]()
 
 ## links
-- Game site: [sweetbonanzarain.com](sweetbonanzarain.com)
+- Game site: [sweetbonanzarain.com](https://sweetbonanzarain.com)
 - [repo for static assets](https://github.com/NodeArt/sweetbonanzarain.com/tree/main/static/assets)
 - [firebase project](https://console.firebase.google.com/project/sweetbonanzarain-com/overview)
 

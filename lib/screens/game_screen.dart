@@ -6,7 +6,7 @@ import 'package:sweetbonanzarain/models/level_model.dart';
 import 'package:sweetbonanzarain/screens/end_screen.dart';
 import 'package:sweetbonanzarain/utils/layout_wrapper.dart';
 import 'package:sweetbonanzarain/widgets/game/game_overlay.dart';
-import 'package:sweetbonanzarain/widgets/game/bonanzo_game.dart';
+import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
 
 class GameScreen extends StatelessWidget {
   final LevelModel level;
@@ -20,14 +20,14 @@ class GameScreen extends StatelessWidget {
     return BackgroundWrapper(
       opacity: 1,
       isShownLogo: false,
-      // backgroundUrl: level.backgroundUrl,
+      backgroundUrl: level.backgroundUrl,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
-            GameWidget<BonanzoGame>(
+            GameWidget<BonanzaGame>(
               key: gameKey,
-              game: BonanzoGame(
+              game: BonanzaGame(
                 level: level,
                 appCubit: context.read<AppCubit>(),
               ),
@@ -41,7 +41,7 @@ class GameScreen extends StatelessWidget {
                       if (state.score >= 700 || state.balls == 0) {
                         final isWon = state.score >= 700;
                         final bonanzoGameState =
-                            gameKey.currentState as GameWidgetState<BonanzoGame>;
+                            gameKey.currentState as GameWidgetState<BonanzaGame>;
                         final bonanzoGame = bonanzoGameState.widget.game;
                         bonanzoGame?.finishLevel(isWon);
                         Navigator.pushReplacement(
@@ -55,7 +55,7 @@ class GameScreen extends StatelessWidget {
                         );
                       }
                     },
-                    child: GameOverlay(level: level), // Ваш GameOverlay виджет
+                    child: GameOverlay(level: level),
                   ),
                 ],
               ),

@@ -89,8 +89,7 @@ class _MenuScreenState extends State<MenuScreen>
                       itemCount: appState.levels.length,
                       itemBuilder: (context, index) {
                         return LevelSelectMenu(
-                          // backgroundUrl: appState.levels[index].previewUrl,
-                          backgroundUrl: 'assets/images/level_${index + 1}.png',
+                          backgroundUrl: appState.levels[index].previewUrl,
                           isRightPlay: index % 2 == 0,
                           isLock: appState.levels[index].isLock,
                           score: appState.levels[index].stars,

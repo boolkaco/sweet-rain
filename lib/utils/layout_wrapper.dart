@@ -1,3 +1,5 @@
+import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +14,7 @@ class BackgroundWrapper extends StatefulWidget {
   const BackgroundWrapper({
     Key? key,
     required this.child,
-    this.backgroundUrl = 'assets/images/bg.png',
+    this.backgroundUrl = '/assets/bg.png',
     this.opacity = 0.5,
     this.isAnimate = false,
     this.isStatic = true,
@@ -79,8 +81,8 @@ class _BackgroundWrapperState extends State<BackgroundWrapper>
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset(
-            widget.backgroundUrl,
+          child: Image.file(
+            ImagesService().getByFilename(widget.backgroundUrl)!,
             fit: BoxFit.cover,
           ),
         ),
@@ -90,8 +92,8 @@ class _BackgroundWrapperState extends State<BackgroundWrapper>
             maxWidth: size.width * 3.5,
             maxHeight: size.height * 3.5,
             alignment: Alignment.center,
-            child: Image.asset(
-              'assets/images/blink.png',
+            child: Image.file(
+              ImagesService().getByFilename(assetsMap['blink']!)!,
               width: size.width * 3.5,
             ),
           ),

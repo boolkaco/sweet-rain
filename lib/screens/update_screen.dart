@@ -1,3 +1,5 @@
+import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/theme/app_colors.dart';
 import 'package:sweetbonanzarain/widgets/common/shadow_text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -33,8 +35,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
             ),
             Stack(
               children: [
-                Image.asset(
-                  'assets/images/update_bg.png',
+                Image.file(
+                  ImagesService().getByFilename(assetsMap['update_bg']!)!,
                   fit: BoxFit.fill,
                   width: size.width * 0.7,
                 ),
@@ -73,8 +75,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
               },
               child: Stack(
                 children: [
-                  Image.asset(
-                    'assets/images/restart_btn.png',
+                  Image.file(
+                    ImagesService().getByFilename(assetsMap['restart_bg']!)!,
                     fit: BoxFit.fill,
                     height: size.height * 0.08,
                   ),

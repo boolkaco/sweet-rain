@@ -1,3 +1,5 @@
+import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/widgets/common/shadow_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,8 +51,8 @@ class AppButton extends StatelessWidget {
       },
       child: Stack(
         children: [
-          Image.asset(
-            'assets/images/${type.name}_btn.png',
+          Image.file(
+            ImagesService().getByFilename(assetsMap['${type.name}_btn']!)!,
             width: _getCustomWidth(screenWidth),
             height: _getCustomHeight(screenHeight),
           ),

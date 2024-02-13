@@ -1,3 +1,5 @@
+import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/theme/app_colors.dart';
 import 'package:sweetbonanzarain/widgets/common/shadow_text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -43,10 +45,10 @@ class _EndScreenState extends State<EndScreen> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Image.asset(
+                Image.file(
                   widget.isWon
-                      ? 'assets/images/win_bg.png'
-                      : 'assets/images/lose_bg.png',
+                      ? ImagesService().getByFilename(assetsMap['win_bg']!)!
+                      : ImagesService().getByFilename(assetsMap['lose_bg']!)!,
                   fit: BoxFit.fill,
                   width: size.width * 0.7,
                 ),
@@ -76,10 +78,10 @@ class _EndScreenState extends State<EndScreen> {
                   left: 0,
                   right: 0,
                   bottom: -40,
-                  child: Image.asset(
+                  child: Image.file(
                     widget.isWon
-                        ? 'assets/images/candy.png'
-                        : 'assets/images/bomb.png',
+                        ? ImagesService().getByFilename(assetsMap['candy']!)!
+                        : ImagesService().getByFilename(assetsMap['bomb']!)!,
                     height: 120,
                     fit: BoxFit.contain,
                   ),
@@ -108,8 +110,8 @@ class _EndScreenState extends State<EndScreen> {
               },
               child: Stack(
                 children: [
-                  Image.asset(
-                    'assets/images/restart_btn.png',
+                  Image.file(
+                    ImagesService().getByFilename(assetsMap['restart_btn']!)!,
                     fit: BoxFit.fill,
                     height: size.height * 0.08,
                   ),

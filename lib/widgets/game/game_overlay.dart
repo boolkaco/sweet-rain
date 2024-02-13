@@ -39,8 +39,8 @@ class GameOverlay extends StatelessWidget {
                   ),
                 );
               },
-              child: Image.asset(
-                'assets/images/back_btn.png',
+              child: Image.file(
+                ImagesService().getByFilename(assetsMap['back_btn']!)!,
                 width: 59,
                 height: 62,
               ),
@@ -107,8 +107,8 @@ class GameOverlay extends StatelessWidget {
                   ),
                 );
               },
-              child: Image.asset(
-                'assets/images/settings_icon.png',
+              child: Image.file(
+                ImagesService().getByFilename(assetsMap['settings_icon']!)!,
                 width: 59,
                 height: 62,
               ),

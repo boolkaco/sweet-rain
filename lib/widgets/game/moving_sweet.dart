@@ -1,16 +1,15 @@
 import 'dart:math';
-import 'dart:ui';
-import 'dart:ui' as ui;
-import 'package:sweetbonanzarain/widgets/game/cannon.dart';
+import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/widgets/game/basket.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
-import 'package:sweetbonanzarain/const/assets.dart';
 import 'package:sweetbonanzarain/services/images_service.dart';
-import 'package:sweetbonanzarain/widgets/game/bonanzo_game.dart';
+import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
+import 'package:flame/src/image_composition.dart' as ImageComposition;
 
 class MovingSweet extends SpriteComponent
-    with CollisionCallbacks, HasGameRef<BonanzoGame> {
+    with CollisionCallbacks, HasGameRef<BonanzaGame> {
   static final Random _random = Random();
   final int imageIndex;
   final AppCubit appCubit;
@@ -29,13 +28,10 @@ class MovingSweet extends SpriteComponent
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final imageIndex = _random.nextInt(10) + 1;
-    // final Image? planetImage = await ImagesService().getImageByFilename(
-    //   assetsMap['planet_$imageIndex']!,
-    // );
-    final ui.Image? planetImage =
-      await ImagesService().loadImage('assets/images/img_$imageIndex.png');
-    sprite = Sprite(planetImage!);
+    final imageIndex = _random.nextInt(11) + 1;
+    final ImageComposition.Image? sweetImage =
+      await ImagesService().getImageByFilename(assetsMap['sweet_$imageIndex']!);
+    sprite = Sprite(sweetImage!);
 
     final screenWidth = gameRef.size.x;
     final planetWidth = size.x;
@@ -63,7 +59,7 @@ class MovingSweet extends SpriteComponent
   @override
   void onRemove() {
     super.onRemove();
-    gameRef.availablePlanets.add(imageIndex);
+    gameRef.availableSweets.add(imageIndex);
     gameRef.spawnPlanet();
   }
 

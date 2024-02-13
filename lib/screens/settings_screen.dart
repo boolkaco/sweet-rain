@@ -1,3 +1,5 @@
+import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/theme/app_colors.dart';
 import 'package:sweetbonanzarain/widgets/common/shadow_text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -31,11 +33,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 Stack(
                   children: [
-                    Image.asset(
-                      'assets/images/settings_bg.png',
-                      fit: BoxFit.fill,
-                      height: 300
-                    ),
+                    Image.file(
+                        ImagesService()
+                            .getByFilename(assetsMap['settings_bg']!)!,
+                        fit: BoxFit.fill,
+                        height: 300),
                     Positioned.fill(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -57,17 +59,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               GestureDetector(
                                 onTap: () {
                                   context
-                                      .read<AppCubit>().updateBackgroundSound();
+                                      .read<AppCubit>()
+                                      .updateBackgroundSound();
                                   if (!appState.isBackgroundSound) {
-                                    context.read<AudioService>().unMuteBackgroundMusic();
+                                    context
+                                        .read<AudioService>()
+                                        .unMuteBackgroundMusic();
                                   } else {
-                                    context.read<AudioService>().muteBackgroundMusic();
+                                    context
+                                        .read<AudioService>()
+                                        .muteBackgroundMusic();
                                   }
                                 },
-                                child: Image.asset(
+                                child: Image.file(
                                   appState.isBackgroundSound
-                                      ? 'assets/images/checkbox_enable.png'
-                                      : 'assets/images/checkbox_disable.png',
+                                      ? ImagesService().getByFilename(
+                                          assetsMap['checkbox_enable']!)!
+                                      : ImagesService().getByFilename(
+                                          assetsMap['checkbox_disable']!)!,
                                   fit: BoxFit.fill,
                                   width: 49,
                                   height: 55,
@@ -94,14 +103,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  context
-                                      .read<AppCubit>()
-                                      .updateButtonsSound();
+                                  context.read<AppCubit>().updateButtonsSound();
                                 },
-                                child: Image.asset(
+                                child: Image.file(
                                   appState.isButtonsSound
-                                      ? 'assets/images/checkbox_enable.png'
-                                      : 'assets/images/checkbox_disable.png',
+                                      ? ImagesService().getByFilename(
+                                          assetsMap['checkbox_enable']!,
+                                        )!
+                                      : ImagesService().getByFilename(
+                                          assetsMap['checkbox_disable']!,
+                                        )!,
                                   fit: BoxFit.fill,
                                   width: 49,
                                   height: 55,
@@ -124,7 +135,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ],
                 ),
-                Expanded(child: Container(),),
+                Expanded(
+                  child: Container(),
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: AppBackButton(),

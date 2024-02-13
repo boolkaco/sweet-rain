@@ -22,9 +22,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // for (var asset in assetsMap.values) {
-      //   await ImageLoader().loadImage(asset);
-      // }
+      for (var asset in assetsMap.values) {
+        await ImageLoader().loadImage(asset);
+      }
 
       await context.read<AudioService>().loadSounds(soundsMap);
       await context.read<AppCubit>().loadLevels();

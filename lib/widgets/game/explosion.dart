@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flame/components.dart';
-import 'package:sweetbonanzarain/widgets/game/bonanzo_game.dart';
+import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
 
-class Explosion extends SpriteAnimationComponent with HasGameRef<BonanzoGame> {
+class Explosion extends SpriteAnimationComponent with HasGameRef<BonanzaGame> {
   Explosion({required Image image, required Vector2 position})
       : super(
           position: position,

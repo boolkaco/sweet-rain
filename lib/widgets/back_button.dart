@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
+import 'package:sweetbonanzarain/const/assets.dart';
 import 'package:sweetbonanzarain/screens/menu_screen.dart';
 import 'package:sweetbonanzarain/services/audio_service.dart';
+import 'package:sweetbonanzarain/services/images_service.dart';
 
 class AppBackButton extends StatelessWidget {
   final Function()? callback;
@@ -32,8 +34,8 @@ class AppBackButton extends StatelessWidget {
           Navigator.pop(context);
         }
       },
-      child: Image.asset(
-        'assets/images/back_btn.png',
+      child: Image.file(
+        ImagesService().getByFilename(assetsMap['back_btn']!)!,
         fit: BoxFit.fill,
         width: 50,
         height: 55,

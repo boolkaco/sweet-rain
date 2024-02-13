@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/utils/layout_wrapper.dart';
 import 'package:sweetbonanzarain/widgets/back_button.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
@@ -36,7 +38,9 @@ class PrivacyScreen extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Image.asset('assets/images/privacy_bg.png'),
+                Image.file(
+                  ImagesService().getByFilename(assetsMap['privacy_bg']!)!,
+                ),
                 Positioned.fill(
                   child: Padding(
                     padding: const EdgeInsets.only(

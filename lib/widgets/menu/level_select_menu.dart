@@ -26,16 +26,16 @@ class LevelSelectMenu extends StatelessWidget {
         alignment: isRightPlay ? Alignment.centerRight : Alignment.centerLeft,
         child: Stack(
           children: [
-            Image.asset(
-              backgroundUrl,
+            Image.file(
+              ImagesService().getByFilename(backgroundUrl)!,
               fit: BoxFit.cover,
             ),
             if (isLock)
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.center,
-                  child: Image.asset(
-                    'assets/images/lock.png',
+                  child: Image.file(
+                    ImagesService().getByFilename(assetsMap['lock']!)!,
                     width: 50,
                     height: 50,
                   ),

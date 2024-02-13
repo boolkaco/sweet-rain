@@ -45,4 +45,4 @@ Please use [firebase_messaging](https://pub.dev/packages/firebase_messaging).
 ### Native splash
 Please use [flutter_native_splash](https://pub.dev/packages/flutter_native_splash) to provide loading screen to step BEFORE loading bar.
 ### Privacy page
-Please use [flutter_inappwebview](https://pub.dev/packages/flutter_inappwebview) for webview. Url of privacy page to show: https://plincogame.com/privacy
+Please use [flutter_inappwebview](https://pub.dev/packages/flutter_inappwebview) for webview. Url of privacy page to show: https://sweetbonanzarain.com/privacy

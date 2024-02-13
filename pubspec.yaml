@@ -1,0 +1,79 @@
+name: sweetbonanzarain
+description: "Fruit catcher game"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  audioplayers: ^5.2.1
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.1.3
+  equatable: ^2.0.5
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  easy_localization: ^3.0.3
+  provider: ^6.1.1
+  image_picker: ^1.0.5
+  flame: ^1.14.0
+  path_provider: ^2.1.2
+  http: ^1.2.0
+  flutter_dotenv: ^5.1.0
+  webview_flutter: ^4.4.4
+  webview_flutter_wkwebview: ^3.10.2
+  webview_flutter_platform_interface: ^2.10.0
+  sentry_flutter: ^7.15.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.7
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/translations/
+    - assets/images/
+    - .env
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito/Nunito-Light.ttf
+          weight: 300
+        - asset: fonts/Nunito/Nunito-Medium.ttf
+          weight: 400
+        - asset: fonts/Nunito/Nunito-SemiBold.ttf
+          weight: 800
+        - asset: fonts/Nunito/Nunito-Bold.ttf
+          weight: 900
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

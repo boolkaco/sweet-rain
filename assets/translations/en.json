@@ -1,0 +1,20 @@
+{
+  "app": "Bonanzo",
+  "loading": "Loading...",
+  "start": "Start",
+  "settings": "Settings",
+  "privacy": "Privacy Policy",
+  "exit": "Exit",
+  "main_sound": "Main sound",
+  "button_sound": "Button sound",
+  "won": "You Won!",
+  "lose": "You lose!",
+  "play_again": "Play Again",
+  "try_again": "Try Again",
+  "congratulations": "Congratulations!",
+  "game_over": "Game over!",
+  "congrats": "Congrats!",
+  "update": "Update",
+  "update_desc": "App update\nrequires reboot!",
+  "reboot": "Restart"
+}

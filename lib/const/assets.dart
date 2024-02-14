@@ -7,6 +7,7 @@ Map<String, String> assetsMap = {
   'lock': '/assets/lock.png',
   'cart_front_1': '/assets/basket/cart-front-1.png',
   'cart_back_1': '/assets/basket/cart-back-1.png',
+  'clouds': '/assets/bg/clouds.png',
   'level_1_bg': '/assets/bg/level-1.png',
   'level_2_bg': '/assets/bg/level-2.png',
   'level_3_bg': '/assets/bg/level-3.png',

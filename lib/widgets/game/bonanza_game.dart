@@ -6,9 +6,11 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/src/image_composition.dart' as ImageComposition;
 import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
+import 'package:sweetbonanzarain/const/assets.dart';
 import 'package:sweetbonanzarain/models/level_model.dart';
 import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/widgets/game/basket.dart';
+import 'package:sweetbonanzarain/widgets/game/moving_clouds_components.dart';
 import 'package:sweetbonanzarain/widgets/game/moving_sweet.dart';
 
 class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
@@ -36,6 +38,10 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
   Future<void> onLoad() async {
     final ImageComposition.Image? bg =
         await ImagesService().getImageByFilename(level.backgroundUrl);
+    final ImageComposition.Image? cloudsImage =
+        await ImagesService().getImageByFilename(assetsMap['clouds']!);
+    final cloudSprite = Sprite(cloudsImage!);
+
     if (bg != null) {
       final sprite = Sprite(bg);
       final spriteComponent = SpriteComponent(sprite: sprite, size: size);
@@ -48,6 +54,12 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     spawnPlanet();
     startTimer();
     _setupSpawnTimer();
+
+    final movingClouds = MovingCloudsComponent(
+      cloudSprite: cloudSprite,
+      speed: 20.0,
+    );
+    add(movingClouds);
   }
 
   void _setupSpawnTimer() {
@@ -123,6 +135,11 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
       add(movingSweet);
       sweets.add(movingSweet);
     }
+  }
+
+  @override
+  void onPanUpdate(DragUpdateInfo info) {
+    basket.move(info.delta.global);
   }
 
   @override

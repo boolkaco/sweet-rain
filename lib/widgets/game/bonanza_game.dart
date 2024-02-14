@@ -135,9 +135,4 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
       spawnPlanet();
     }
   }
-
-  @override
-  void onPanUpdate(DragUpdateInfo info) {
-    basket.move(info.delta.global);
-  }
 }

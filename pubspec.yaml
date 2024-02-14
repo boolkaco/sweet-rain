@@ -27,6 +27,7 @@ dependencies:
   webview_flutter_wkwebview: ^3.10.2
   webview_flutter_platform_interface: ^2.10.0
   sentry_flutter: ^7.15.0
+  sensors_plus: ^4.0.2
 
 dev_dependencies:
   flutter_test:

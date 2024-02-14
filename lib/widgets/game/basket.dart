@@ -1,5 +1,8 @@
 // ignore_for_file: library_prefixes, implementation_imports
 
+import 'dart:async';
+
+import 'package:sensors_plus/sensors_plus.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/src/image_composition.dart' as ImageComposition;
@@ -19,9 +22,21 @@ class Basket extends PositionComponent
   Basket(this.appCubit) : super(anchor: Anchor.bottomCenter);
 
   final AudioService audioService = AudioService();
+  late StreamSubscription<dynamic> _accelerometerSubscription;
+  double _lastUpdate = 0;
+  final double _updateInterval = 1 / 60;
 
   @override
   Future<void> onLoad() async {
+    _accelerometerSubscription = accelerometerEvents.listen((AccelerometerEvent event) {
+      final double now = DateTime.now().millisecondsSinceEpoch / 1000;
+      if (now - _lastUpdate > _updateInterval) {
+        final movementSpeed = event.x * -2;
+        move(Vector2(movementSpeed, 0));
+        _lastUpdate = now;
+      }
+    });
+
     final ImageComposition.Image? basketFront =
         await ImagesService().getImageByFilename(assetsMap['cart_front_1']!);
 
@@ -51,6 +66,12 @@ class Basket extends PositionComponent
     } else {
       log.message('Error: Could not load sprites.');
     }
+  }
+
+  @override
+  void onRemove() {
+    super.onRemove();
+    _accelerometerSubscription.cancel();
   }
 
   void move(Vector2 delta) {

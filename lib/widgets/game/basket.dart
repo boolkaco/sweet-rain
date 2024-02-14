@@ -45,7 +45,7 @@ class Basket extends PositionComponent
     final ImageComposition.Image? basketBack = await ImagesService()
         .getImageByFilename(assetsMap['cart_back_${level.basketIndex}']!);
 
-    add(RectangleHitbox(size: Vector2(100, 50)));
+    add(RectangleHitbox(size: Vector2(80, 40)));
 
     if (basketFront != null && basketBack != null) {
       _basketBack = SpriteComponent(

@@ -29,8 +29,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await context.read<AudioService>().loadSounds(soundsMap);
       await context.read<AppCubit>().loadLevels();
 
-      context.read<AudioService>().stopBackgroundMusic();
-      context.read<AudioService>().loopSound('background_sound');
+      // context.read<AudioService>().stopBackgroundMusic();
+      // context.read<AudioService>().loopSound('background_sound');
 
       Future.delayed(const Duration(seconds: 0), () {
         Navigator.pushReplacement(

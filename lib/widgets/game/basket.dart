@@ -8,6 +8,7 @@ import 'package:flame/components.dart';
 import 'package:flame/src/image_composition.dart' as ImageComposition;
 import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
 import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/models/level_model.dart';
 import 'package:sweetbonanzarain/services/audio_service.dart';
 import 'package:sweetbonanzarain/services/images_service.dart';
 import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
@@ -18,8 +19,9 @@ class Basket extends PositionComponent
   late SpriteComponent _basketBack;
   late SpriteComponent _basketFront;
   final AppCubit appCubit;
+  final LevelModel level;
 
-  Basket(this.appCubit) : super(anchor: Anchor.bottomCenter);
+  Basket(this.appCubit, this.level) : super(anchor: Anchor.bottomCenter);
 
   final AudioService audioService = AudioService();
   late StreamSubscription<dynamic> _accelerometerSubscription;
@@ -37,11 +39,11 @@ class Basket extends PositionComponent
       }
     });
 
-    final ImageComposition.Image? basketFront =
-        await ImagesService().getImageByFilename(assetsMap['cart_front_1']!);
+    final ImageComposition.Image? basketFront = await ImagesService()
+        .getImageByFilename(assetsMap['cart_front_${level.basketIndex}']!);
 
-    final ImageComposition.Image? basketBack =
-        await ImagesService().getImageByFilename(assetsMap['cart_back_1']!);
+    final ImageComposition.Image? basketBack = await ImagesService()
+        .getImageByFilename(assetsMap['cart_back_${level.basketIndex}']!);
 
     add(RectangleHitbox(size: Vector2(100, 50)));
 

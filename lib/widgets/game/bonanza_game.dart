@@ -48,7 +48,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
       add(spriteComponent);
     }
 
-    basket = Basket(appCubit)..position = size / 2;
+    basket = Basket(appCubit, level)..position = size / 2;
     add(basket);
 
     spawnPlanet();

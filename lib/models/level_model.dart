@@ -1,18 +1,16 @@
 class LevelModel {
   final int maxPlanet;
-  final int minSpeedPlanet;
-  final int maxSpeedPlanet;
   final int stars;
+  final int basketIndex;
   final String backgroundUrl;
   final String previewUrl;
   final bool isLock;
 
   LevelModel({
     required this.maxPlanet,
-    required this.minSpeedPlanet,
-    required this.maxSpeedPlanet,
     required this.backgroundUrl,
     required this.previewUrl,
+    this.basketIndex = 1,
     this.isLock = true,
     this.stars = 0,
   });
@@ -20,8 +18,7 @@ class LevelModel {
   LevelModel copyWith({int? stars, bool? isLock}) {
     return LevelModel(
       maxPlanet: maxPlanet,
-      minSpeedPlanet: minSpeedPlanet,
-      maxSpeedPlanet: maxSpeedPlanet,
+      basketIndex: basketIndex,
       backgroundUrl: backgroundUrl,
       previewUrl: previewUrl,
       isLock: isLock ?? this.isLock,
@@ -32,8 +29,7 @@ class LevelModel {
   Map<String, dynamic> toJson() {
     return {
       'maxPlanet': maxPlanet,
-      'minSpeedPlanet': minSpeedPlanet,
-      'maxSpeedPlanet': maxSpeedPlanet,
+      'basketIndex': basketIndex,
       'stars': stars,
       'isLock': isLock,
       'backgroundUrl': backgroundUrl,
@@ -47,8 +43,7 @@ class LevelModel {
   }) {
     return LevelModel(
       maxPlanet: json['maxPlanet'],
-      minSpeedPlanet: json['minSpeedPlanet'],
-      maxSpeedPlanet: json['maxSpeedPlanet'],
+      basketIndex: json['basketIndex'],
       backgroundUrl: json['backgroundUrl'],
       previewUrl: json['previewUrl'],
       stars: json['stars'],

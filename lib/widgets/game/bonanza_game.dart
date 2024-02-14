@@ -31,7 +31,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     required this.level,
     required this.appCubit,
   }) {
-    maxSweets = level.maxPlanet;
+    maxSweets = level.maxSweets;
   }
 
   @override
@@ -51,7 +51,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     basket = Basket(appCubit, level)..position = size / 2;
     add(basket);
 
-    spawnPlanet();
+    spawnSweets();
     startTimer();
     _setupSpawnTimer();
 
@@ -66,11 +66,11 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     final double spawnDelay =
         _random.nextDouble() * (_maxSpawnDelay - _minSpawnDelay) +
             _minSpawnDelay;
-    _spawnTimer = Timer(spawnDelay, onTick: _spawnPlanet, repeat: true);
+    _spawnTimer = Timer(spawnDelay, onTick: _spawnSweets, repeat: true);
     _spawnTimer.start();
   }
 
-  void _spawnPlanet() {
+  void _spawnSweets() {
     if (isSpawningActive && sweets.length < maxSweets) {
       final index =
           availableSweets.elementAt(_random.nextInt(availableSweets.length));
@@ -121,7 +121,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     appCubit.finishLevel(level, stars);
   }
 
-  void spawnPlanet() {
+  void spawnSweets() {
     if (sweets.isEmpty && availableSweets.isNotEmpty) {
       final index = availableSweets.elementAt(
         _random.nextInt(availableSweets.length),
@@ -149,7 +149,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     _spawnTimer.update(dt);
     sweets.removeWhere((planet) => planet.isRemoved);
     if (sweets.length < maxSweets) {
-      spawnPlanet();
+      spawnSweets();
     }
   }
 }

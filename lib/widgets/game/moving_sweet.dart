@@ -62,7 +62,7 @@ class MovingSweet extends SpriteComponent
   void onRemove() {
     super.onRemove();
     gameRef.availableSweets.add(imageIndex);
-    gameRef.spawnPlanet();
+    gameRef.spawnSweets();
   }
 
   @override

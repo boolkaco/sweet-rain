@@ -1,5 +1,5 @@
 class LevelModel {
-  final int maxPlanet;
+  final int maxSweets;
   final int stars;
   final int basketIndex;
   final String backgroundUrl;
@@ -7,7 +7,7 @@ class LevelModel {
   final bool isLock;
 
   LevelModel({
-    required this.maxPlanet,
+    required this.maxSweets,
     required this.backgroundUrl,
     required this.previewUrl,
     this.basketIndex = 1,
@@ -17,7 +17,7 @@ class LevelModel {
 
   LevelModel copyWith({int? stars, bool? isLock}) {
     return LevelModel(
-      maxPlanet: maxPlanet,
+      maxSweets: maxSweets,
       basketIndex: basketIndex,
       backgroundUrl: backgroundUrl,
       previewUrl: previewUrl,
@@ -28,7 +28,7 @@ class LevelModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'maxPlanet': maxPlanet,
+      'maxSweets': maxSweets,
       'basketIndex': basketIndex,
       'stars': stars,
       'isLock': isLock,
@@ -42,7 +42,7 @@ class LevelModel {
     bool isLock = true,
   }) {
     return LevelModel(
-      maxPlanet: json['maxPlanet'],
+      maxSweets: json['maxSweets'],
       basketIndex: json['basketIndex'],
       backgroundUrl: json['backgroundUrl'],
       previewUrl: json['previewUrl'],

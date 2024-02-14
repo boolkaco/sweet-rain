@@ -4,28 +4,28 @@ import 'package:sweetbonanzarain/models/level_model.dart';
 class Levels {
   static List<LevelModel> list = [
     LevelModel(
-      maxPlanet: 4,
+      maxSweets: 4,
       basketIndex: 1,
       backgroundUrl: assetsMap['level_1_bg']!,
       previewUrl: assetsMap['level_1_preview']!,
       isLock: false,
     ),
     LevelModel(
-      maxPlanet: 3,
+      maxSweets: 3,
       basketIndex: 2,
       backgroundUrl: assetsMap['level_2_bg']!,
       previewUrl: assetsMap['level_2_preview']!,
       isLock: true,
     ),
     LevelModel(
-      maxPlanet: 2,
+      maxSweets: 2,
       basketIndex: 3,
       backgroundUrl: assetsMap['level_3_bg']!,
       previewUrl: assetsMap['level_3_preview']!,
       isLock: true,
     ),
     LevelModel(
-      maxPlanet: 2,
+      maxSweets: 2,
       backgroundUrl: assetsMap['level_4_bg']!,
       previewUrl: assetsMap['level_4_preview']!,
       isLock: true,

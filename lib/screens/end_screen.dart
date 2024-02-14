@@ -32,6 +32,12 @@ class _EndScreenState extends State<EndScreen> {
   bool isButtonSound = true;
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AppCubit>(context).setSpawn(false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BackgroundWrapper(

@@ -8,8 +8,9 @@ import 'package:sweetbonanzarain/services/images_service.dart';
 
 class AppBackButton extends StatelessWidget {
   final Function()? callback;
+  final bool toMenu;
 
-  AppBackButton({super.key, this.callback});
+  AppBackButton({super.key, this.callback, this.toMenu = false});
 
   final AudioService audioService = AudioService();
 
@@ -22,6 +23,15 @@ class AppBackButton extends StatelessWidget {
         }
         if (callback != null) {
           callback!();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MenuScreen(
+                isLoaded: true,
+              ),
+            ),
+          );
+        } else if (toMenu) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

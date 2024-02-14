@@ -8,19 +8,31 @@ import 'package:sweetbonanzarain/utils/layout_wrapper.dart';
 import 'package:sweetbonanzarain/widgets/game/game_overlay.dart';
 import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
   final LevelModel level;
 
-  GameScreen({super.key, required this.level});
+  const GameScreen({super.key, required this.level});
 
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
   final GlobalKey<GameWidgetState> gameKey = GlobalKey();
+  bool listenerActive = true;
+
+  @override
+  void dispose() {
+    listenerActive = false;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BackgroundWrapper(
       opacity: 1,
       isShownLogo: false,
-      backgroundUrl: level.backgroundUrl,
+      backgroundUrl: widget.level.backgroundUrl,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
@@ -28,7 +40,7 @@ class GameScreen extends StatelessWidget {
             GameWidget<BonanzaGame>(
               key: gameKey,
               game: BonanzaGame(
-                level: level,
+                level: widget.level,
                 appCubit: context.read<AppCubit>(),
               ),
             ),
@@ -38,24 +50,30 @@ class GameScreen extends StatelessWidget {
                 children: [
                   BlocListener<AppCubit, AppState>(
                     listener: (context, state) {
-                      if (state.score >= 700 || state.balls == 0) {
-                        final isWon = state.score >= 700;
-                        final bonanzoGameState =
-                            gameKey.currentState as GameWidgetState<BonanzaGame>;
-                        final bonanzoGame = bonanzoGameState.widget.game;
-                        bonanzoGame?.finishLevel(isWon);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EndScreen(
-                              level: level,
-                              isWon: isWon,
-                            ),
-                          ),
-                        );
+                      if (listenerActive && mounted) {
+                        if (state.isSpawn) {
+                          if (state.score >= 700 || state.balls == 0) {
+                            final isWon = state.score >= 700;
+                            final bonanzaGameState = gameKey.currentState
+                            as GameWidgetState<BonanzaGame>;
+                            final bonanzaGame = bonanzaGameState.widget.game;
+                            bonanzaGame?.finishLevel(isWon);
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => EndScreen(
+                                  level: widget.level,
+                                  isWon: isWon,
+                                ),
+                              ),
+                            );
+                          }
+                        }
                       }
                     },
-                    child: GameOverlay(level: level),
+                    child: GameOverlay(
+                      level: widget.level,
+                      gameKey: gameKey,
+                    ),
                   ),
                 ],
               ),

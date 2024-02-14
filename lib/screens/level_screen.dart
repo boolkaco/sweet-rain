@@ -12,8 +12,13 @@ import 'package:sweetbonanzarain/widgets/back_button.dart';
 
 class LevelScreen extends StatelessWidget {
   final LevelModel level;
+  final bool toMenu;
 
-  const LevelScreen({super.key, required this.level});
+  const LevelScreen({
+    super.key,
+    required this.level,
+    this.toMenu = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +109,9 @@ class LevelScreen extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: AppBackButton(),
+              child: AppBackButton(
+                toMenu: toMenu,
+              ),
             ),
             SizedBox(
               height: screenHeight * 0.04,

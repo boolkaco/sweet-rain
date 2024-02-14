@@ -53,7 +53,7 @@ class AppCubit extends Cubit<AppState> {
     }
 
     saveLevels();
-    emit(state.copyWith(levels: updatedLevels));
+    emit(state.copyWith(levels: updatedLevels, isSpawn: false));
   }
 
   void addScore(int points) {
@@ -79,8 +79,16 @@ class AppCubit extends Cubit<AppState> {
       levels: state.levels,
       balls: 10,
       score: 0,
+      isSpawn: true,
       isButtonsSound: state.isButtonsSound,
       isBackgroundSound: state.isBackgroundSound,
+    ));
+  }
+
+  void setSpawn(bool status) {
+    emit(state.copyWith(
+      levels: state.levels,
+      isSpawn: status,
     ));
   }
 

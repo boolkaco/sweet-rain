@@ -20,6 +20,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
   final Set<int> availableSweets = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   final AppCubit appCubit;
   double timeElapsed = 0.0;
+  bool isSpawningActive = true;
   late Timer _spawnTimer;
   final double _minSpawnDelay = 1.0;
   final double _maxSpawnDelay = 2.0;
@@ -58,14 +59,28 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
   }
 
   void _spawnPlanet() {
-    if (sweets.length < maxSweets) {
+    if (isSpawningActive && sweets.length < maxSweets) {
       final index =
           availableSweets.elementAt(_random.nextInt(availableSweets.length));
       availableSweets.remove(index);
       final movingSweet = MovingSweet(index, appCubit, verticalSpeed: 200);
       add(movingSweet);
       sweets.add(movingSweet);
-      _spawnTimer.stop();
+      if (isSpawningActive) {
+        _spawnTimer.stop();
+        _setupSpawnTimer();
+      }
+    }
+  }
+
+  void stopSpawning() {
+    isSpawningActive = false;
+    _spawnTimer.stop();
+  }
+
+  void startSpawning() {
+    if (!isSpawningActive) {
+      isSpawningActive = true;
       _setupSpawnTimer();
     }
   }
@@ -79,6 +94,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
   }
 
   void finishLevel(bool isWon) {
+    stopSpawning();
     int stars;
     if (timeElapsed <= 10) {
       stars = 3;

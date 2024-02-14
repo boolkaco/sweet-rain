@@ -46,7 +46,7 @@ class AppCubit extends Cubit<AppState> {
         stars: stars,
       );
 
-      if (stars > 0 && currentIndex < updatedLevels.length - 1) {
+      if (currentIndex < updatedLevels.length - 1) {
         updatedLevels[currentIndex + 1] =
             updatedLevels[currentIndex + 1].copyWith(isLock: false);
       }

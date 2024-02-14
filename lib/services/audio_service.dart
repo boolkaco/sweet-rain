@@ -13,8 +13,7 @@ class AudioService {
     final directory = await getApplicationDocumentsDirectory();
 
     for (String key in soundsMap.keys) {
-      // TODO: replace base url to bonanza.com
-      final url = 'https://plincogame.com' + soundsMap[key]!;
+      final url = basePath + soundsMap[key]!;
       final filePath = '${directory.path}/$key.mp3';
       final fileExists = await File(filePath).exists();
 

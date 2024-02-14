@@ -43,8 +43,9 @@ Map<String, String> assetsMap = {
 };
 
 Map<String, String> soundsMap = {
-  'background_sound': '/assets/music/background.mp3',
-  'boom_sound': '/assets/music/boom.mp3',
-  'buttons_sound': '/assets/music/buttons.mp3',
-  'gun_sound': '/assets/music/gun.mp3',
+  'background_sound': '/assets/sounds/bg.mp3',
+  'basket_sound': '/assets/sounds/basket.mp3',
+  'buttons_sound': '/assets/sounds/btn.mp3',
+  'fail_sound': '/assets/sounds/faile.mp3',
+  'success_sound': '/assets/sounds/success.mp3',
 };

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:sweetbonanzarain/const/assets.dart';
+import 'package:sweetbonanzarain/services/audio_service.dart';
 import 'package:sweetbonanzarain/widgets/game/basket.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -14,6 +15,7 @@ class MovingSweet extends SpriteComponent
   final int imageIndex;
   final AppCubit appCubit;
   final double verticalSpeed;
+  final AudioService audioService = AudioService();
 
   MovingSweet(
     this.imageIndex,
@@ -70,6 +72,7 @@ class MovingSweet extends SpriteComponent
   ) async {
     super.onCollisionStart(intersectionPoints, other);
     if (other is Basket) {
+      audioService.playSound('basket_sound');
       appCubit.addScore(
         100,
       );

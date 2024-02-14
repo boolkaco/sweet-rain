@@ -28,13 +28,13 @@ class EndScreen extends StatefulWidget {
 
 class _EndScreenState extends State<EndScreen> {
   final AudioService audioService = AudioService();
-  bool isMainSound = true;
-  bool isButtonSound = true;
 
   @override
   void initState() {
     super.initState();
     BlocProvider.of<AppCubit>(context).setSpawn(false);
+
+    audioService.playSound(widget.isWon ? 'success_sound' : 'fail_sound');
   }
 
   @override

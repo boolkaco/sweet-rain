@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
 import 'package:sweetbonanzarain/models/level_model.dart';
@@ -93,15 +94,7 @@ class LevelScreen extends StatelessWidget {
                     label: "exit".tr(),
                     type: AppButtonType.exit,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              PrivacyScreen(),
-                          transitionDuration: Duration.zero,
-                          reverseTransitionDuration: Duration.zero,
-                        ),
-                      );
+                      SystemNavigator.pop();
                     },
                   ),
                 ],

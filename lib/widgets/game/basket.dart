@@ -25,18 +25,13 @@ class Basket extends PositionComponent
 
   final AudioService audioService = AudioService();
   late StreamSubscription<dynamic> _accelerometerSubscription;
-  double _lastUpdate = 0;
-  final double _updateInterval = 1 / 60;
+  final double sensitivity = 2.0;
+  double _movementSpeed = 0.0;
 
   @override
   Future<void> onLoad() async {
     _accelerometerSubscription = accelerometerEvents.listen((AccelerometerEvent event) {
-      final double now = DateTime.now().millisecondsSinceEpoch / 1000;
-      if (now - _lastUpdate > _updateInterval) {
-        final movementSpeed = event.x * -2;
-        move(Vector2(movementSpeed, 0));
-        _lastUpdate = now;
-      }
+      _movementSpeed = event.x * sensitivity * 100;
     });
 
     final ImageComposition.Image? basketFront = await ImagesService()
@@ -68,6 +63,17 @@ class Basket extends PositionComponent
     } else {
       log.message('Error: Could not load sprites.');
     }
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    double dx = -_movementSpeed * dt;
+    position.x = (position.x + dx).clamp(0.0, gameRef.size.x - size.x);
+  }
+
+  double lerp(double start, double end, double percent) {
+    return start + (end - start) * percent;
   }
 
   @override

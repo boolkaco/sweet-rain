@@ -8,8 +8,10 @@ import 'package:sweetbonanzarain/screens/level_screen.dart';
 import 'package:sweetbonanzarain/screens/menu_screen.dart';
 import 'package:sweetbonanzarain/services/audio_service.dart';
 import 'package:sweetbonanzarain/services/images_service.dart';
-import 'package:sweetbonanzarain/theme/app_colors.dart';
+import 'package:sweetbonanzarain/widgets/common/stroke_text.dart';
 import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
+import 'package:sweetbonanzarain/widgets/hearts_bar.dart';
+import 'package:sweetbonanzarain/widgets/score_bar.dart';
 
 class GameOverlay extends StatelessWidget {
   final LevelModel level;
@@ -25,6 +27,7 @@ class GameOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, appState) {
         return Row(
@@ -54,58 +57,30 @@ class GameOverlay extends StatelessWidget {
               },
               child: Image.file(
                 ImagesService().getByFilename(assetsMap['back_btn']!)!,
-                width: 59,
-                height: 62,
+                width: size.width * 0.12,
+                // height: 62,
               ),
             ),
-            // Expanded(
-            //   child: Container(
-            //     padding: const EdgeInsets.only(
-            //       bottom: 2,
-            //       right: 24,
-            //       left: 24,
-            //     ),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: [
-            //         Row(
-            //           children: [
-            //             Image.file(
-            //               ImagesService().getByFilename(assetsMap['coin_icon']!)!,
-            //               width: 28,
-            //               height: 30,
-            //             ),
-            //             const SizedBox(width: 6),
-            //             Text(
-            //               appState.score.toString(),
-            //               style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-            //                     color: AppColors.white,
-            //                     height: 3.2,
-            //                   ),
-            //             )
-            //           ],
-            //         ),
-            //         Row(
-            //           children: [
-            //             Image.file(
-            //               ImagesService().getByFilename(assetsMap['ball_icon']!)!,
-            //               width: 28,
-            //               height: 30,
-            //             ),
-            //             const SizedBox(width: 6),
-            //             Text(
-            //               appState.balls.toString(),
-            //               style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-            //                     color: AppColors.white,
-            //                     height: 3.2,
-            //                   ),
-            //             )
-            //           ],
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.only(
+                  bottom: 2,
+                  right: 24,
+                  left: 24,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    HeartsBar(
+                      filledHearts: appState.hearts,
+                    ),
+                    ScoreBar(
+                      score: appState.score,
+                    ),
+                  ],
+                ),
+              ),
+            ),
             GestureDetector(
               onTap: () {
                 if (context.read<AppCubit>().state.isButtonsSound) {
@@ -131,8 +106,7 @@ class GameOverlay extends StatelessWidget {
               },
               child: Image.file(
                 ImagesService().getByFilename(assetsMap['settings_icon']!)!,
-                width: 59,
-                height: 62,
+                width: size.width * 0.12,
               ),
             ),
           ],

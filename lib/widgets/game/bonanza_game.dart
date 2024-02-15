@@ -19,7 +19,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
   late Basket basket;
   late int maxSweets;
   final List<MovingSweet> sweets = [];
-  final Set<int> availableSweets = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  final Set<int> availableSweets = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
   final AppCubit appCubit;
   double timeElapsed = 0.0;
   bool isSpawningActive = true;
@@ -51,7 +51,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     basket = Basket(appCubit, level)..position = size / 2;
     add(basket);
 
-    spawnSweets();
+    // spawnSweets();
     startTimer();
     _setupSpawnTimer();
 
@@ -75,7 +75,11 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
       final index =
           availableSweets.elementAt(_random.nextInt(availableSweets.length));
       availableSweets.remove(index);
-      final movingSweet = MovingSweet(index, appCubit, verticalSpeed: 200);
+      final movingSweet = MovingSweet(
+        index,
+        appCubit,
+        verticalSpeed: level.speed,
+      );
       add(movingSweet);
       sweets.add(movingSweet);
       if (isSpawningActive) {
@@ -107,18 +111,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
 
   void finishLevel(bool isWon) {
     stopSpawning();
-    int stars;
-    if (timeElapsed <= 10) {
-      stars = 3;
-    } else if (timeElapsed <= 20) {
-      stars = 2;
-    } else {
-      stars = 0;
-    }
-    if (!isWon) {
-      stars = 0;
-    }
-    appCubit.finishLevel(level, stars);
+    appCubit.finishLevel(level, isWon);
   }
 
   void spawnSweets() {
@@ -130,7 +123,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
       final movingSweet = MovingSweet(
         index,
         appCubit,
-        verticalSpeed: 200,
+        verticalSpeed: level.speed,
       );
       add(movingSweet);
       sweets.add(movingSweet);

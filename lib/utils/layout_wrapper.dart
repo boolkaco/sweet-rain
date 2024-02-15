@@ -100,7 +100,7 @@ class _BackgroundWrapperState extends State<BackgroundWrapper>
         ),
         if (widget.isShownLogo)
           Positioned(
-            top: 100,
+            top: size.height * 0.12,
             left: 0,
             right: 0,
             child: Align(

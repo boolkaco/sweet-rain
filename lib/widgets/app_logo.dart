@@ -11,8 +11,7 @@ class AppLogo extends StatelessWidget {
     return Image.file(
       ImagesService().getByFilename(assetsMap['logo']!)!,
       fit: BoxFit.cover,
-      width: 264,
-      height: 226,
+      width: screenWidth * 0.65,
     );
   }
 }

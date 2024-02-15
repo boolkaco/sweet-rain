@@ -22,14 +22,14 @@ class LevelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
+    Size size = MediaQuery.of(context).size;
     return BackgroundWrapper(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            const SizedBox(
-              height: 320,
+            SizedBox(
+              height: size.height * 0.4,
             ),
             Expanded(
               child: Column(
@@ -50,9 +50,9 @@ class LevelScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  // SizedBox(
-                  //   height: screenHeight * 0.01,
-                  // ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
                   AppButton(
                     label: "settings".tr(),
                     type: AppButtonType.settings,
@@ -68,9 +68,9 @@ class LevelScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  // SizedBox(
-                  //   height: screenHeight * 0.01,
-                  // ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
                   AppButton(
                     label: "privacy".tr(),
                     type: AppButtonType.privacy,
@@ -86,9 +86,9 @@ class LevelScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  // SizedBox(
-                  //   height: screenHeight * 0.01,
-                  // ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
                   AppButton(
                     label: "exit".tr(),
                     type: AppButtonType.exit,
@@ -114,7 +114,7 @@ class LevelScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: screenHeight * 0.04,
+              height: size.height * 0.04,
             ),
           ],
         ),

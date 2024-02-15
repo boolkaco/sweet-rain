@@ -29,6 +29,7 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BackgroundWrapper(
       opacity: 1,
       isShownLogo: false,
@@ -45,15 +46,22 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 60, right: 35, left: 35),
+              padding: EdgeInsets.only(
+                top: 60,
+                right: size.width * 0.06,
+                left: size.width * 0.06,
+              ),
               child: Column(
                 children: [
                   BlocListener<AppCubit, AppState>(
                     listener: (context, state) {
                       if (listenerActive && mounted) {
                         if (state.isSpawn) {
-                          if (state.score >= 700 || state.balls == 0) {
-                            final isWon = state.score >= 700;
+                          if (state.score >= widget.level.targetScores ||
+                              state.hearts == 0) {
+                            final isWon =
+                                state.score >= widget.level.targetScores &&
+                                    state.hearts > 0;
                             final bonanzaGameState = gameKey.currentState
                             as GameWidgetState<BonanzaGame>;
                             final bonanzaGame = bonanzaGameState.widget.game;

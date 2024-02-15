@@ -28,8 +28,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             backgroundColor: Colors.transparent,
             body: Column(
               children: [
-                const SizedBox(
-                  height: 320,
+                SizedBox(
+                  height: size.height * 0.4,
                 ),
                 Stack(
                   children: [

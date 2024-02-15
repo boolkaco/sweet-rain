@@ -30,8 +30,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            const SizedBox(
-              height: 320,
+            SizedBox(
+              height: size.height * 0.4,
             ),
             Stack(
               children: [
@@ -76,7 +76,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
               child: Stack(
                 children: [
                   Image.file(
-                    ImagesService().getByFilename(assetsMap['restart_bg']!)!,
+                    ImagesService().getByFilename(assetsMap['restart_btn']!)!,
                     fit: BoxFit.fill,
                     height: size.height * 0.08,
                   ),

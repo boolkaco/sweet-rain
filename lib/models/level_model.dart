@@ -1,7 +1,8 @@
 class LevelModel {
   final int maxSweets;
-  final int stars;
+  final int targetScores;
   final int basketIndex;
+  final double speed;
   final String backgroundUrl;
   final String previewUrl;
   final bool isLock;
@@ -10,19 +11,21 @@ class LevelModel {
     required this.maxSweets,
     required this.backgroundUrl,
     required this.previewUrl,
+    required this.speed,
     this.basketIndex = 1,
     this.isLock = true,
-    this.stars = 0,
+    this.targetScores = 1000,
   });
 
-  LevelModel copyWith({int? stars, bool? isLock}) {
+  LevelModel copyWith({int? targetScores, bool? isLock}) {
     return LevelModel(
       maxSweets: maxSweets,
       basketIndex: basketIndex,
       backgroundUrl: backgroundUrl,
       previewUrl: previewUrl,
       isLock: isLock ?? this.isLock,
-      stars: stars ?? this.stars,
+      targetScores: targetScores ?? this.targetScores,
+      speed: speed,
     );
   }
 
@@ -30,7 +33,8 @@ class LevelModel {
     return {
       'maxSweets': maxSweets,
       'basketIndex': basketIndex,
-      'stars': stars,
+      'targetScores': targetScores,
+      'speed': speed,
       'isLock': isLock,
       'backgroundUrl': backgroundUrl,
       'previewUrl': previewUrl,
@@ -46,7 +50,8 @@ class LevelModel {
       basketIndex: json['basketIndex'],
       backgroundUrl: json['backgroundUrl'],
       previewUrl: json['previewUrl'],
-      stars: json['stars'],
+      targetScores: json['targetScores'],
+      speed: json['speed'],
       isLock: json['isLock'] ?? isLock,
     );
   }

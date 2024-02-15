@@ -16,6 +16,7 @@ class MovingSweet extends SpriteComponent
   final AppCubit appCubit;
   final double verticalSpeed;
   final AudioService audioService = AudioService();
+  late int tempIndex;
 
   MovingSweet(
     this.imageIndex,
@@ -31,6 +32,7 @@ class MovingSweet extends SpriteComponent
     await super.onLoad();
 
     final imageIndex = _random.nextInt(11) + 1;
+    tempIndex = imageIndex;
     final ImageComposition.Image? sweetImage =
       await ImagesService().getImageByFilename(assetsMap['sweet_$imageIndex']!);
     sprite = Sprite(sweetImage!);
@@ -50,11 +52,17 @@ class MovingSweet extends SpriteComponent
   @override
   void update(double dt) {
     super.update(dt);
-
     position.y += verticalSpeed * dt;
 
-    if (position.y > gameRef.size.y) {
+    if (position.y > gameRef.size.y && !isRemoved) {
+      onFallenOutside();
       removeFromParent();
+    }
+  }
+
+  void onFallenOutside() {
+    if (tempIndex != 1) {
+      appCubit.onSweetMissed();
     }
   }
 
@@ -74,8 +82,9 @@ class MovingSweet extends SpriteComponent
     if (other is Basket) {
       audioService.playSound('basket_sound');
       appCubit.addScore(
-        100,
+        tempIndex == 1 ? -200 : 100,
       );
+
       removeFromParent();
     }
   }

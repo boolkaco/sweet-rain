@@ -3,7 +3,7 @@ part of 'app_cubit.dart';
 class AppState extends Equatable {
   final List<LevelModel> levels;
   final int score;
-  final int balls;
+  final int hearts;
   final bool isSpawn;
   final bool isBackgroundSound;
   final bool isButtonsSound;
@@ -11,7 +11,7 @@ class AppState extends Equatable {
   const AppState({
     required this.levels,
     this.score = 0,
-    this.balls = 10,
+    this.hearts = 3,
     this.isSpawn = false,
     this.isBackgroundSound = true,
     this.isButtonsSound = true,
@@ -21,7 +21,7 @@ class AppState extends Equatable {
   List<Object?> get props => [
         levels,
         score,
-        balls,
+        hearts,
         isSpawn,
         isBackgroundSound,
         isButtonsSound,
@@ -30,7 +30,7 @@ class AppState extends Equatable {
   AppState copyWith({
     required List<LevelModel> levels,
     int? score,
-    int? balls,
+    int? hearts,
     bool? isSpawn,
     bool? isBackgroundSound,
     bool? isButtonsSound,
@@ -38,7 +38,7 @@ class AppState extends Equatable {
     return AppState(
       levels: levels,
       score: score ?? this.score,
-      balls: balls ?? this.balls,
+      hearts: hearts ?? this.hearts,
       isSpawn: isSpawn ?? this.isSpawn,
       isBackgroundSound: isBackgroundSound ?? this.isBackgroundSound,
       isButtonsSound: isButtonsSound ?? this.isButtonsSound,

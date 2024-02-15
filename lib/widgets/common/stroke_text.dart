@@ -6,6 +6,7 @@ class StrokeText extends StatelessWidget {
   final Color color;
   final Color strokeColor;
   final double size;
+  final double strokeWidth;
   final FontWeight fontWeight;
 
   const StrokeText(
@@ -14,6 +15,7 @@ class StrokeText extends StatelessWidget {
     this.color = AppColors.white,
     this.strokeColor = AppColors.aqua,
     this.size = 30,
+    this.strokeWidth = 6,
     this.fontWeight = FontWeight.w800,
   });
 
@@ -28,7 +30,7 @@ class StrokeText extends StatelessWidget {
                 fontWeight: fontWeight,
                 foreground: Paint()
                   ..style = PaintingStyle.stroke
-                  ..strokeWidth = 6
+                  ..strokeWidth = strokeWidth
                   ..color = strokeColor,
               ),
         ),

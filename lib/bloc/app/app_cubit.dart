@@ -36,19 +36,15 @@ class AppCubit extends Cubit<AppState> {
     await box.close();
   }
 
-  void finishLevel(LevelModel level, int stars) {
+  void finishLevel(LevelModel level, bool isWon) {
     List<LevelModel> updatedLevels = List.from(state.levels);
 
     int currentIndex = updatedLevels.indexWhere((l) => l == level);
 
     if (currentIndex != -1) {
-      updatedLevels[currentIndex] = updatedLevels[currentIndex].copyWith(
-        stars: stars,
-      );
-
       if (currentIndex < updatedLevels.length - 1) {
         updatedLevels[currentIndex + 1] =
-            updatedLevels[currentIndex + 1].copyWith(isLock: false);
+            updatedLevels[currentIndex + 1].copyWith(isLock: !isWon);
       }
     }
 
@@ -57,19 +53,20 @@ class AppCubit extends Cubit<AppState> {
   }
 
   void addScore(int points) {
+    final newScore = state.score + points;
     emit(state.copyWith(
       levels: state.levels,
-      score: state.score + points,
-      balls: state.balls,
+      score: newScore < 0 ? 0 : newScore,
+      hearts: state.hearts,
     ));
   }
 
-  void useBall() {
-    if (state.balls > 0) {
+  void onSweetMissed() {
+    if (state.hearts > 0) {
       emit(state.copyWith(
         levels: state.levels,
         score: state.score,
-        balls: state.balls - 1,
+        hearts: state.hearts - 1,
       ));
     }
   }
@@ -77,7 +74,7 @@ class AppCubit extends Cubit<AppState> {
   void resetGame() {
     emit(state.copyWith(
       levels: state.levels,
-      balls: 10,
+      hearts: 3,
       score: 0,
       isSpawn: true,
       isButtonsSound: state.isButtonsSound,

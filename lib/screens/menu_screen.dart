@@ -64,6 +64,7 @@ class _MenuScreenState extends State<MenuScreen>
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, appState) {
         return BackgroundWrapper(
@@ -73,8 +74,8 @@ class _MenuScreenState extends State<MenuScreen>
             backgroundColor: Colors.transparent,
             body: Column(
               children: [
-                const SizedBox(
-                  height: 320,
+                SizedBox(
+                  height: size.height * 0.4,
                 ),
                 if (_isLoaded)
                   Expanded(
@@ -92,7 +93,6 @@ class _MenuScreenState extends State<MenuScreen>
                           backgroundUrl: appState.levels[index].previewUrl,
                           isRightPlay: index % 2 == 0,
                           isLock: appState.levels[index].isLock,
-                          score: appState.levels[index].stars,
                           onTap: () => _selectLevel(appState.levels[index]),
                         );
                       },

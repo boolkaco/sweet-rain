@@ -6,7 +6,6 @@ class LevelSelectMenu extends StatelessWidget {
   final String backgroundUrl;
   final bool isRightPlay;
   final bool isLock;
-  final int score;
   final Function() onTap;
 
   const LevelSelectMenu({
@@ -15,7 +14,6 @@ class LevelSelectMenu extends StatelessWidget {
     required this.onTap,
     required this.isLock,
     this.isRightPlay = true,
-    this.score = 0,
   });
 
   @override

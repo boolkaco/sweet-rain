@@ -45,8 +45,8 @@ class _EndScreenState extends State<EndScreen> {
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            const SizedBox(
-              height: 320,
+            SizedBox(
+              height: size.height * 0.4,
             ),
             Stack(
               clipBehavior: Clip.none,
@@ -83,19 +83,19 @@ class _EndScreenState extends State<EndScreen> {
                 Positioned(
                   left: 0,
                   right: 0,
-                  bottom: -40,
+                  bottom: -size.height * 0.04,
                   child: Image.file(
                     widget.isWon
                         ? ImagesService().getByFilename(assetsMap['candy']!)!
                         : ImagesService().getByFilename(assetsMap['bomb']!)!,
-                    height: 120,
+                    height: size.height * 0.14,
                     fit: BoxFit.contain,
                   ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 65,
+            SizedBox(
+              height: size.height * 0.06,
             ),
             GestureDetector(
               onTap: () {

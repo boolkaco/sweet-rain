@@ -5,12 +5,14 @@ import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
 import 'package:sweetbonanzarain/screens/loading_screen.dart';
 import 'package:sweetbonanzarain/utils/theme_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock/wakelock.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Wakelock.enable();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),

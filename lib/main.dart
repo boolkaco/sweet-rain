@@ -16,10 +16,10 @@ import 'package:sweetbonanzarain/services/logger.dart';
 Future<void> main() async {
   await platformInit();
 
-  // await SentryFlutter.init(
-  //   _sentryOptions,
-  //   appRunner: () => runApp(const EntryPoint()),
-  // );
+  await SentryFlutter.init(
+    _sentryOptions,
+    appRunner: () => runApp(const EntryPoint()),
+  );
   runApp(const EntryPoint());
 }
 

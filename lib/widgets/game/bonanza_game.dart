@@ -9,14 +9,16 @@ import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
 import 'package:sweetbonanzarain/const/assets.dart';
 import 'package:sweetbonanzarain/models/level_model.dart';
 import 'package:sweetbonanzarain/services/images_service.dart';
-import 'package:sweetbonanzarain/widgets/game/basket.dart';
+import 'package:sweetbonanzarain/widgets/game/basket_back.dart';
+import 'package:sweetbonanzarain/widgets/game/basket_front.dart';
 import 'package:sweetbonanzarain/widgets/game/moving_clouds_components.dart';
 import 'package:sweetbonanzarain/widgets/game/moving_sweet.dart';
 
 class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
   static final Random _random = Random();
   final LevelModel level;
-  late Basket basket;
+  late BasketBack basketBack;
+  late BasketFront basketFront;
   late int maxSweets;
   final List<MovingSweet> sweets = [];
   final Set<int> availableSweets = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
@@ -48,10 +50,11 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
       add(spriteComponent);
     }
 
-    basket = Basket(appCubit, level)..position = size / 2;
-    add(basket);
+    basketBack = BasketBack(appCubit, level)..position = size / 2;
+    basketFront = BasketFront(appCubit, level)..position = size / 2;
+    add(basketBack);
 
-    // spawnSweets();
+    spawnSweets();
     startTimer();
     _setupSpawnTimer();
 
@@ -59,6 +62,7 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
       cloudSprite: cloudSprite,
       speed: 20.0,
     );
+    add(basketFront);
     add(movingClouds);
   }
 
@@ -130,10 +134,12 @@ class BonanzaGame extends FlameGame with PanDetector, HasCollisionDetection {
     }
   }
 
-  // @override
-  // void onPanUpdate(DragUpdateInfo info) {
-  //   basket.move(info.delta.global);
-  // }
+  @override
+  void onPanUpdate(DragUpdateInfo info) {
+    basketBack.move(info.delta.global);
+    basketFront.move(info.delta.global);
+    basketFront.priority = 2;
+  }
 
   @override
   void update(double dt) {

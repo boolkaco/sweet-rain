@@ -1,11 +1,11 @@
 import 'dart:math';
 import 'package:sweetbonanzarain/const/assets.dart';
 import 'package:sweetbonanzarain/services/audio_service.dart';
-import 'package:sweetbonanzarain/widgets/game/basket.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
 import 'package:sweetbonanzarain/services/images_service.dart';
+import 'package:sweetbonanzarain/widgets/game/basket_front.dart';
 import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
 import 'package:flame/src/image_composition.dart' as ImageComposition;
 
@@ -17,6 +17,7 @@ class MovingSweet extends SpriteComponent
   final double verticalSpeed;
   final AudioService audioService = AudioService();
   late int tempIndex;
+  bool isCollidedWithBasket = false;
 
   MovingSweet(
     this.imageIndex,
@@ -33,8 +34,8 @@ class MovingSweet extends SpriteComponent
 
     final imageIndex = _random.nextInt(11) + 1;
     tempIndex = imageIndex;
-    final ImageComposition.Image? sweetImage =
-      await ImagesService().getImageByFilename(assetsMap['sweet_$imageIndex']!);
+    final ImageComposition.Image? sweetImage = await ImagesService()
+        .getImageByFilename(assetsMap['sweet_$imageIndex']!);
     sprite = Sprite(sweetImage!);
 
     final screenWidth = gameRef.size.x;
@@ -44,6 +45,7 @@ class MovingSweet extends SpriteComponent
         _random.nextDouble() * (screenWidth - planetWidth) + planetWidth / 2;
 
     position = Vector2(horizontalPosition, -size.y);
+    priority = 1;
 
     final hitbox = CircleHitbox(radius: size.x / 2);
     add(hitbox);
@@ -53,10 +55,21 @@ class MovingSweet extends SpriteComponent
   void update(double dt) {
     super.update(dt);
     position.y += verticalSpeed * dt;
+    priority = 1;
 
-    if (position.y > gameRef.size.y && !isRemoved) {
+    final basket = gameRef.basketFront;
+
+    if (isCollidedWithBasket) {
+      if (position.y > basket.position.y + basket.size.y) {
+        if (!isRemoved) {
+          removeFromParent();
+        }
+      }
+    } else if (position.y > gameRef.size.y && !isRemoved) {
       onFallenOutside();
-      removeFromParent();
+      if (!isRemoved) {
+        removeFromParent();
+      }
     }
   }
 
@@ -79,13 +92,12 @@ class MovingSweet extends SpriteComponent
     PositionComponent other,
   ) async {
     super.onCollisionStart(intersectionPoints, other);
-    if (other is Basket) {
+    if (other is BasketFront) {
+      isCollidedWithBasket = true;
       audioService.playSound('basket_sound');
       appCubit.addScore(
         tempIndex == 1 ? -200 : 100,
       );
-
-      removeFromParent();
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:sweetbonanzarain/bloc/app/app_cubit.dart';
 import 'package:sweetbonanzarain/services/images_service.dart';
+import 'package:sweetbonanzarain/widgets/game/basket_back.dart';
 import 'package:sweetbonanzarain/widgets/game/basket_front.dart';
 import 'package:sweetbonanzarain/widgets/game/bonanza_game.dart';
 import 'package:flame/src/image_composition.dart' as ImageComposition;
@@ -18,6 +19,8 @@ class MovingSweet extends SpriteComponent
   final AudioService audioService = AudioService();
   late int tempIndex;
   bool isCollidedWithBasket = false;
+  bool movingToCenter = false;
+  double centerSpeed = 200;
 
   MovingSweet(
     this.imageIndex,
@@ -54,22 +57,27 @@ class MovingSweet extends SpriteComponent
   @override
   void update(double dt) {
     super.update(dt);
-    position.y += verticalSpeed * dt;
-    priority = 1;
 
-    final basket = gameRef.basketFront;
+    if (movingToCenter) {
+      double centerX =
+          gameRef.basketFront.position.x + gameRef.basketFront.size.x / 2;
 
-    if (isCollidedWithBasket) {
-      if (position.y > basket.position.y + basket.size.y) {
-        if (!isRemoved) {
-          removeFromParent();
-        }
+      if (position.x < centerX) {
+        position.x = min(centerX, position.x + centerSpeed * dt);
+      } else if (position.x > centerX) {
+        position.x = max(centerX, position.x - centerSpeed * dt);
       }
-    } else if (position.y > gameRef.size.y && !isRemoved) {
-      onFallenOutside();
-      if (!isRemoved) {
-        removeFromParent();
+
+      position.y += verticalSpeed * dt;
+    } else {
+      position.y += verticalSpeed * dt;
+    }
+
+    if (position.y > gameRef.size.y && !isRemoved) {
+      if (!isCollidedWithBasket) {
+        onFallenOutside();
       }
+      removeFromParent();
     }
   }
 
@@ -92,12 +100,15 @@ class MovingSweet extends SpriteComponent
     PositionComponent other,
   ) async {
     super.onCollisionStart(intersectionPoints, other);
+
+    if ((other is BasketBack) && !movingToCenter) {
+      movingToCenter = true;
+    }
+
     if (other is BasketFront) {
       isCollidedWithBasket = true;
       audioService.playSound('basket_sound');
-      appCubit.addScore(
-        tempIndex == 1 ? -200 : 100,
-      );
+      appCubit.addScore(tempIndex == 1 ? -200 : 100);
     }
   }
 }

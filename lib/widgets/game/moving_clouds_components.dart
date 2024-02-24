@@ -28,8 +28,8 @@ class MovingCloudsComponent extends PositionComponent
       size: Vector2(size.x / 2, size.y),
     )..position = Vector2(size.x / 2, 0);
 
-    cloudComponent1.priority = 1;
-    cloudComponent2.priority = 1;
+    cloudComponent1.priority = 2;
+    cloudComponent2.priority = 2;
     add(cloudComponent1);
     add(cloudComponent2);
   }
@@ -40,8 +40,8 @@ class MovingCloudsComponent extends PositionComponent
 
     position.x += speed * dt;
 
-    priority = 1;
-    priority = 1;
+    priority = 2;
+    priority = 2;
 
     if (position.x >= 0) {
       position.x -= size.x / 2;

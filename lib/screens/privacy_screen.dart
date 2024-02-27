@@ -40,7 +40,7 @@ class PrivacyScreen extends StatelessWidget {
               children: [
                 Image.file(
                   ImagesService().getByFilename(assetsMap['privacy_bg']!)!,
-                  width: size.width > 400 ? null : size.width * 0.6,
+                  width: size.width * 0.6,
                 ),
                 Positioned.fill(
                   child: Padding(
